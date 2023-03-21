@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Data API builder Testing Page</title>
+	<meta name="description" content="A simple page to test that Data API builder is working fine">
+	<meta name="author" content="Davide">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container">		
+		<h1>Books list:</h1>		
+        <div id="#books">
+            <ul class="list-group">                
+            </ul>
+        </div>
+    </div>    
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
+    <script>
+        async function loadItems() {
+            var url = "https://localhost:5001/rest/todos?$first=5"
+            var response = await fetch(url) 
+            var payload = await response.json();            
+            return payload.value;
+        }
+
+        $(function() {
+            loadItems().then(result => {                 
+                var ul = $("ul");
+                result.forEach(item => {
+                    var li = $(`<li class='list-group-item'>${item.title}</li>`);
+                    ul.append(li);
+                });
+            } );
+        });
+        
+	</script>
+</body>
+
+</html>
