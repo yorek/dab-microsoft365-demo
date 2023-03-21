@@ -1,0 +1,81 @@
+{
+  "$schema": "https://dataapibuilder.azureedge.net/schemas/latest/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "options": {
+      "set-session-context": true
+    },
+    "connection-string": "@env('AZURE_SQL')"
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/rest"
+    },
+    "graphql": {
+      "allow-introspection": true,
+      "enabled": true,
+      "path": "/graphql"
+    },
+    "host": {
+      "mode": "development",
+      "cors": {
+        "origins": [],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "AzureAD",
+        "jwt": {
+          "issuer": "https://login.microsoftonline.com/6c94075a-da0a-4c6a-8411-badf652e8b53/v2.0/",
+          "audience": "4d1a3ac4-a31b-4263-aca7-b60c247ff535"
+        }
+      }
+    }
+  },
+  "entities": {
+    "Todo": {
+      "source": {
+        "object": "dbo.todos",
+        "type": "table"
+      },
+      "rest": {
+        "path": "todo"
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "policy": {
+                "database": "@item.owner_id eq 'public'"
+              }
+            }            
+          ]
+        },
+        {
+          "role": "authenticated",
+          "actions": [
+            {
+              "action": "*",
+              "policy": {
+                "database": "@item.owner_id eq 'authenticated'"
+              }
+            }            
+          ]
+        },       
+        {
+          "role": "Sample.Role.1",
+          "actions": [
+            {
+              "action": "*",             
+              "policy": {
+                "database": "@item.owner_id eq @claims.oid"
+              }
+            }            
+          ]
+        }        
+      ]
+    }    
+  }
+}
