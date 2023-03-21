@@ -15,7 +15,7 @@
 
 <body>
 	<div class="container">		
-		<h1>Books list:</h1>		
+		<h1>Items:</h1>		
         <div id="#books">
             <ul class="list-group">                
             </ul>
@@ -24,7 +24,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
     <script>
         async function loadItems() {
-            var url = "https://localhost:5001/rest/todos?$first=5"
+            var url = "/data-api/rest/todo?$first=5"
             var response = await fetch(url) 
             var payload = await response.json();            
             return payload.value;
