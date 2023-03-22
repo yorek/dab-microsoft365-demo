@@ -1,6 +1,0 @@
-{
-  "globalHeaders": {
-    "Access-Control-Allow-Origin": "https://piasysdev.sharepoint.com",
-    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE, PATCH"
-  }
-}
