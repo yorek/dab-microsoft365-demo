@@ -20,8 +20,8 @@
     "host": {
       "mode": "development",
       "cors": {
-        "origins": [],
-        "allow-credentials": false
+        "origins": [ "https://piasysdev.sharepoint.com" ],
+        "allow-credentials": true
       },
       "authentication": {
         "provider": "AzureAD",
