@@ -19,7 +19,19 @@ once the project has been built you'll have a `TodoDB.dacpac` in the `./TodoDB/b
 
 ## Use Data API builder on-prem
 
-You can download and install Data API builder from [here](https://aka.ms/dab). You can use the provided `dab-config.json` to run Data API builder against your database:
+You can download and install Data API builder from [here](https://aka.ms/dab). You can use the provided `dab-config.json` to run Data API builder against your database. You need to set the environment variable `AZURE_SQL` so that it contains the connection string to your Azure SQL database. You can do that by running the following command in a Linux shell:
+
+```bash  
+export AZURE_SQL="Server=tcp:<SERVER_NAME>.database.windows.net,1433;Initial Catalog=TodoDB;Persist Security Info=False;User ID=<USER_NAME>;Password=<PASSWORD>;"
+```
+
+or with PowerShell:
+
+```powershell
+$env:AZURE_SQL="Server=tcp:<SERVER_NAME>.database.windows.net,1433;Initial Catalog=TodoDB;Persist Security Info=False;User ID=<USER_NAME>;Password=<PASSWORD>;"
+```
+
+and then you can start Data API builder using the following command:
 
 ```shell
 dab start
